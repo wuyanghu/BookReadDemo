@@ -67,8 +67,6 @@
     
     CFArrayRef runs = CTLineGetGlyphRuns(_lineRef);//获取lineRef中CTRunRef数组
     CFIndex runCount = CFArrayGetCount(runs);//获取数组runs中的个数
-    //获取CTLineRef中字形个数
-    CFIndex rus = CTLineGetGlyphCount(_lineRef);
     
     for (int j = 0; j<runCount; j++) {
         CTRunRef runRef = CFArrayGetValueAtIndex(runs, j);
@@ -100,9 +98,6 @@
             free(positions);
         }
         
-        //        CGFloat baseLine = self.baseLine - ((ascent + descent) / 2 - descent);
-        //        height += baseLine;
-        
         CGFloat originx = self.lineFrame.origin.x + runOrigin.x;
         CGFloat originy = CGRectGetMaxY(self.lineFrame) - runOrigin.y - height;
         CGRect runFrame = CGRectMake(originx, originy, runWidth, height);
@@ -111,17 +106,11 @@
         
         //有角标获取当前line的最小Y和最大height 选中用
         NSDictionary *attributes = runModel.attributes;
-        
-        CGFloat lineParaSpacingBefore = 0;
-        CGFloat lineParaSpacing = 0;
+
         CGFloat lineSpacing = 0;
         
         CTParagraphStyleRef paragraphRef =  (__bridge CFTypeRef)attributes[NSParagraphStyleAttributeName];
         CTParagraphStyleGetValueForSpecifier(paragraphRef, kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(lineSpacing), &lineSpacing);
-        
-        //            self.lineParagraphSpacingBefore = MAX(lineParaSpacingBefore, self.lineParagraphSpacingBefore);
-        //            self.lineParagraphSpacing = MAX(lineParaSpacing, self.lineParagraphSpacing);
-        //            self.lineSpacing = MAX(lineSpacing, self.lineSpacing);
         
         CMBadgeTextType badgeType = [attributes[CMTextBadgeTypeAttribute] integerValue];
         if (badgeType != CMBadgeTextTypeNone) {
@@ -130,14 +119,6 @@
         }
         
         runModel.runFrame = runFrame;
-//        runModel.stringRange = CMNSRangeFromCFRange(cfRange);
-//        runModel.textRange = cfRange;
-//        if (NSMaxRange(relativeRange) <= self.stringRange.length) {
-//            runModel.attributedString = [self.attributedString attributedSubstringFromRange:relativeRange];;
-//            runModel.runText = runModel.attributedString.string;
-//        }
-
-        NSDictionary *attrs = (id)CTRunGetAttributes(runRef);
         
         [self.runArr addObject:runModel];
     }

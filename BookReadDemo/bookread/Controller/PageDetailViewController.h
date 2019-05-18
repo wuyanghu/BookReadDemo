@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreTextPageModel.h"
-#import "CoreTextModel.h"
+#import "CTPageModel.h"
+#import "CTModel.h"
 
 @interface PageDetailViewController : UIViewController
-- (void)refreshView:(CoreTextPageModel *)pageData coreTextModel:(CoreTextModel *)coreTextModel;
+- (void)refreshViewWithIndex:(NSInteger)index coreTextModel:(CTModel *)coreTextModel;
 @end

@@ -7,22 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CoreTextModel.h"
+@class CTModel;
 
-@class CTFrameConfigManager;
 @interface CTFrameParser : NSObject
-
-/**
- *  配置信息格式化
- *
- */
-+(NSDictionary *)attributesWithConfig;
-
-/**
- *  给内容设置配置信息
- *
- *  @param path   模板文件路径
- */
-+(CoreTextModel *)parseTemplateFile:(NSString *)path;
-
+- (void)parseBookReadFile:(NSString *)path;
+- (CTModel *)getCTModel;
 @end

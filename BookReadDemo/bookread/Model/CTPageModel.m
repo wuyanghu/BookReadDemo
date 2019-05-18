@@ -6,15 +6,15 @@
 //  Copyright © 2018 wupeng. All rights reserved.
 //
 
-#import "CoreTextPageModel.h"
+#import "CTPageModel.h"
 #import "CTFrameConfigManager.h"
 #import "CoreTextConstant.h"
 
-@interface CoreTextPageModel ()
+@interface CTPageModel ()
 
 @end
 
-@implementation CoreTextPageModel
+@implementation CTPageModel
 
 - (void)setFrameRef:(CTFrameRef)frameRef{
     if (_frameRef != frameRef) {
@@ -75,6 +75,8 @@
     }
 }
 
+#pragma mark - private method
+
 - (CGAffineTransform)transform
 {
     CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
@@ -101,11 +103,9 @@
 }
 
 #pragma mark - 简单工厂模式
-+ (CoreTextPageModel *)createPageModel:(CTFrameRef)frameRef frameRefRange:(CFRange)frameRefRange path:(CGRect)path content:(NSAttributedString *)content{
-    CoreTextPageModel * pageModel = [CoreTextPageModel new];
++ (CTPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString *)content{
+    CTPageModel * pageModel = [CTPageModel new];
     pageModel.content = content;
-    pageModel.frameRefRange = frameRefRange;
-    pageModel.path = path;
     pageModel.frameRef = frameRef;
     
     return pageModel;

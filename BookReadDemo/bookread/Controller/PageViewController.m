@@ -14,8 +14,8 @@
 
 @interface PageViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 {
-    CoreTextModel * _coreTextData;
-    BOOL isAfterPage;
+    CTModel * _coreTextData;
+    BOOL _isAfterPage;
 }
 @property(nonatomic ,strong) UIPageViewController *pageViewController;
 @property(nonatomic ,strong) NSMutableArray<PageDetailViewController *> * dataArray;
@@ -23,25 +23,25 @@
 
 @implementation PageViewController
 
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"阅读翻页"];
 
     //添加pageViewController到Controller
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
+    [self addPageViewControllerToSelf];
     
-    //设置配置信息
-    CTFrameConfigManager *config = [CTFrameConfigManager shareInstance];
-    config.width = self.view.frame.size.width;
-    config.height = self.view.frame.size.height-64-20;
-    //获取模板文件
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"JsonTemplate" ofType:@"json"];
-    //创建绘制数据实例
-    _coreTextData = [CTFrameParser parseTemplateFile:path];
-    PageDetailViewController *imageViewController = [self createImage:0];
-    [imageViewController refreshView:_coreTextData.pageDataArray[config.indexPage] coreTextModel:_coreTextData];
+    _coreTextData = [self paresBookReadFile];
+
+    [[self getPageDetailVC:0] refreshViewWithIndex:[self getConfigManager].indexPage coreTextModel:_coreTextData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,45 +49,91 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - private method
+
+- (void)addPageViewControllerToSelf{
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
+}
+
+- (CTFrameConfigManager *)getConfigManager{
+    return [CTFrameConfigManager shareInstance];
+}
+
+- (CTModel *)paresBookReadFile{
+    CTFrameParser * parserCT = [CTFrameParser new];
+    [parserCT parseBookReadFile:[self readConfigBookReadFile]];
+    return parserCT.getCTModel;
+}
+
+- (NSString *)readConfigBookReadFile{
+    return [[NSBundle mainBundle] pathForResource:@"JsonTemplate" ofType:@"json"];
+}
+
+- (BOOL)indexOverBorderDataArr:(NSArray *)dataArr index:(NSInteger)index{
+    if (index<0 || index>=dataArr.count) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSInteger)calculateBeforeIndex:(PageDetailViewController *)viewController{
+    NSInteger beforeIndex = [self integerWithController:(PageDetailViewController *)viewController];
+    beforeIndex = (beforeIndex-1+3)%3;
+    
+    return beforeIndex;
+}
+
+- (NSInteger)calculateAfterIndex:(PageDetailViewController *)viewController{
+    NSUInteger afterIndex = [self integerWithController:(PageDetailViewController *)viewController];
+    afterIndex = (afterIndex+1)%3;
+    
+    return afterIndex;
+}
+
+- (void)calculateCurrentIndex{
+    CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
+    if (_isAfterPage) {
+        configManager.indexPage++;
+        if (configManager.indexPage == _coreTextData.pageDataArray.count) {
+            configManager.indexPage--;
+        }
+    }else{
+        configManager.indexPage--;
+        if (configManager.indexPage<0) {
+            configManager.indexPage++;
+        }
+    }
+    
+}
+
 #pragma mark - UIPageViewControllerDataSource
 //显示前一页
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    isAfterPage = NO;
-    
-    NSInteger integer = [self integerWithController:(PageDetailViewController *)viewController];
-    integer = (integer-1+3)%3;
+    _isAfterPage = NO;
     
     CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
     if (configManager.indexPage == 0) {
-        [SVProgressHUD showImage:nil status:@"前面没有了"];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"前面没有了"];
         return nil;
     }
-    PageDetailViewController * imageVC = [self createImage:integer];
+    PageDetailViewController * imageVC = [self getPageDetailVC:[self calculateBeforeIndex:(PageDetailViewController *)viewController]];
     return imageVC;
 }
 
 //显示下一页
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    isAfterPage = YES;
+    _isAfterPage = YES;
     
-    NSUInteger index = [self integerWithController:(PageDetailViewController *)viewController];
-    index = (index+1)%3;
-    if (index == self.dataArray.count)
-    {
-        return nil;
-    }
-
     CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
-
-    if (configManager.indexPage>0 && configManager.indexPage ==_coreTextData.pageDataArray.count-1) {
-        [SVProgressHUD showImage:nil status:@"后面没有了"];
+    if (configManager.indexPage == _coreTextData.pageDataArray.count-1) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"后面没有了"];
         return nil;
     }
 
-    PageDetailViewController * imageVC = [self createImage:index];
-    return imageVC;
+    return [self getPageDetailVC:[self calculateAfterIndex:(PageDetailViewController *)viewController]];
     
 }
 
@@ -107,26 +153,13 @@
 //翻页视图控制器将要翻页时执行的方法
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers
 {
-    NSLog(@"将要翻页也就是手势触发时调用方法");
+    [self calculateCurrentIndex];
 
-    CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
-    if (isAfterPage) {
-        configManager.indexPage++;
-        if (configManager.indexPage == _coreTextData.pageDataArray.count) {
-            configManager.indexPage--;
-        }
-    }else{
-        configManager.indexPage--;
-        if (configManager.indexPage<0) {
-            configManager.indexPage++;
-        }
-    }
-    NSLog(@"111-indexPage=%ld",configManager.indexPage);
     PageDetailViewController * pageDetailVC = (PageDetailViewController *)pendingViewControllers.firstObject;
-    if (configManager.indexPage>=0 && configManager.indexPage<_coreTextData.pageDataArray.count) {
-        [pageDetailVC refreshView:_coreTextData.pageDataArray[configManager.indexPage] coreTextModel:_coreTextData];
+    if (![self indexOverBorderDataArr:_coreTextData.pageDataArray index:[self getConfigManager].indexPage]) {
+        [pageDetailVC refreshViewWithIndex:[self getConfigManager].indexPage coreTextModel:_coreTextData];
     }else{
-        [SVProgressHUD showImage:nil status:@"越界了"];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"越界了"];
     }
 }
 
@@ -176,7 +209,7 @@
         _pageViewController.doubleSided = NO;
         
         //设置首页显示数据
-        PageDetailViewController *imageViewController = [self createImage:0];
+        PageDetailViewController *imageViewController = [self getPageDetailVC:0];
         NSArray *array = [NSArray arrayWithObjects:imageViewController, nil];
         [_pageViewController setViewControllers:array
                                       direction:UIPageViewControllerNavigationDirectionReverse
@@ -190,20 +223,18 @@
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
         for (int i = 0; i < 3; i++) {
-            PageDetailViewController *imageVC = [[PageDetailViewController alloc]init];
-            [_dataArray addObject:imageVC];
+            PageDetailViewController * pageDetailVC = [[PageDetailViewController alloc]init];
+            [_dataArray addObject:pageDetailVC];
         }
     }
     return _dataArray;
 }
 
-//获取指定显示controller
--(PageDetailViewController *)createImage:(NSInteger)integer
+-(PageDetailViewController *)getPageDetailVC:(NSInteger)integer
 {
     return [self.dataArray objectAtIndex:integer];
 }
 
-//获取显示controller元素下标
 -(NSInteger)integerWithController:(PageDetailViewController *)vc
 {
     return [self.dataArray indexOfObject:vc];

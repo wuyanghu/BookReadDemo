@@ -12,13 +12,13 @@
 @implementation CoreTextUtils
 
 //检测点击位置是否在链接上
-+(CoreTextLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CoreTextPageModel *)pageModel coreTextModel:(CoreTextModel *)coreTextModel{
++(CTLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CTPageModel *)pageModel coreTextModel:(CTModel *)coreTextModel{
 
     CTFrameRef textFrame = pageModel.frameRef;
     CFArrayRef lines = CTFrameGetLines(textFrame);
     if (!lines) return nil;
     CFIndex count = CFArrayGetCount(lines);
-    CoreTextLinkModel *foundLink = nil;
+    CTLinkModel *foundLink = nil;
     
     //获得每一行的origin坐标
     CGPoint origins[count];
@@ -62,10 +62,10 @@
 }
 
 //判断这个偏移是否在我们的链接列表中
-+(CoreTextLinkModel *)linkAtIndex:(CFIndex)i linkArray:(NSArray *)linkArray{
++(CTLinkModel *)linkAtIndex:(CFIndex)i linkArray:(NSArray *)linkArray{
     
-    CoreTextLinkModel *link = nil;
-    for (CoreTextLinkModel *data in linkArray) {
+    CTLinkModel *link = nil;
+    for (CTLinkModel *data in linkArray) {
         if (NSLocationInRange(i, data.range)) {
             link = data;
             break;

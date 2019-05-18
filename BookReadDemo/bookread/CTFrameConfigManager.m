@@ -25,13 +25,17 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        _width = 200.0f;
-        _height = 300.0f;
+        _width = screenRect.size.width;
+        _height = screenRect.size.height-64-20;
         _fontSize = 16.0f;
         _lineSpace = 8.0f;
         _textColor = RGB(108, 108, 108);
     }
     return self;
+}
+
+- (CGRect)getDrawCTFrame{
+    return CGRectMake(20, 0, self.width-40, self.height);
 }
 
 @end

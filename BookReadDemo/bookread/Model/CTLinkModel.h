@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CoreTextLinkModel : NSObject
+@interface CTLinkModel : NSObject
 
 @property (copy, nonatomic)NSString *title;
 @property (copy, nonatomic)NSString *url;
 @property (assign, nonatomic)NSRange range;
-
++ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(NSRange)range;
 @end

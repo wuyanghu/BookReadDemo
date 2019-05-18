@@ -20,4 +20,5 @@
 
 @property (nonatomic,assign) NSInteger indexPage;//阅读下标
 + (instancetype)shareInstance;
+- (CGRect)getDrawCTFrame;
 @end
