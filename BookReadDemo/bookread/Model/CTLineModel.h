@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 //初始化textline
 - (instancetype)initWithLineRef:(CTLineRef)lineRef;
 - (void)buildGlyphRuns;
+
++ (CTLineModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex;
 @end
 
 NS_ASSUME_NONNULL_END

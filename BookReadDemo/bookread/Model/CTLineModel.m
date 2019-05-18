@@ -133,4 +133,23 @@
     return _runArr;
 }
 
+#pragma mark - static method
+
++ (CTLineModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex {
+    CTLineModel * lineModel = [[CTLineModel alloc] initWithLineRef:lineRef];
+    lineModel.baseLine = (ascent + descent) /2 - descent;
+    lineModel.baselineOrigin = CGPointMake(lineFrame->origin.x, lineFrame->origin.y + ascent);
+    lineModel.lineFrame = *lineFrame;
+    lineModel.textRange = *cfRange;
+    lineModel.attributedRange = *cfRange;
+    lineModel.stringRange = *lineRange;
+    lineModel.selectFrame = *lineFrame;
+    if (lineRange->location+lineRange->length <= maxIndex) {
+        lineModel.attributedString = [(__bridge NSAttributedString *)cfAttributedString attributedSubstringFromRange:*lineRange];
+        lineModel.lineText =  lineModel.attributedString.string;
+    }
+    [lineModel buildGlyphRuns];
+    return lineModel;
+}
+
 @end

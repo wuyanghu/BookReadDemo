@@ -26,9 +26,6 @@
 - (void)ctFrameGetCtLine:(CTFrameRef)frameRef{
     [self.lineArr removeAllObjects];
     
-    CGPathRef path = CTFrameGetPath(frameRef);
-    CGRect pathRect = CGPathGetBoundingBox(path);//获取CTFrameRef的CGRect
-    
     CFMutableAttributedStringRef cfAttributedString = (__bridge CFMutableAttributedStringRef)(_content);
     CFIndex maxIndex = CFAttributedStringGetLength(cfAttributedString);
 
@@ -44,32 +41,11 @@
         
         CGFloat ascent;
         CGFloat descent;
-        CGFloat leading;
-        CGFloat width = CTLineGetTypographicBounds(lineRef, &ascent, &descent, &leading);
-        CGFloat height = ascent + descent;
+        CGRect lineFrame = [self getLineFrame:&ascent descent:&descent lineRef:lineRef origin:origins[i]];//这个变量可放置LineModel内部计算
         
-        CGPoint origin = origins[i];
-        CGFloat originx = origin.x + CGRectGetMinX(pathRect);
-        CGFloat originy = origin.y + CGRectGetMinY(pathRect) - descent;
-        
-        CGRect lineFrame = CGRectMake(originx, originy, width, height);
-        lineFrame = CGRectApplyAffineTransform(lineFrame,[self transform]);
-        
-        CFRange cfRange = CTLineGetStringRange(lineRef);
+        CFRange cfRange = [self rangeFromLineRef:lineRef];
         NSRange lineRange = NSMakeRange(cfRange.location, cfRange.length);
-        CTLineModel * lineModel = [[CTLineModel alloc] initWithLineRef:lineRef];
-        lineModel.baseLine = (ascent + descent) /2 - descent;
-        lineModel.baselineOrigin = CGPointMake(lineFrame.origin.x, lineFrame.origin.y + ascent);
-        lineModel.lineFrame = lineFrame;
-        lineModel.textRange = cfRange;
-        lineModel.attributedRange = cfRange;
-        lineModel.stringRange = lineRange;
-        lineModel.selectFrame = lineFrame;
-        if (lineRange.location+lineRange.length <= maxIndex) {
-            lineModel.attributedString = [(__bridge NSAttributedString *)cfAttributedString attributedSubstringFromRange:lineRange];
-            lineModel.lineText =  lineModel.attributedString.string;
-        }
-        [lineModel buildGlyphRuns];
+        CTLineModel * lineModel = [CTLineModel createLineModel:ascent cfAttributedString:cfAttributedString cfRange:&cfRange descent:descent lineFrame:&lineFrame lineRange:&lineRange lineRef:lineRef maxIndex:maxIndex];
         [self.lineArr addObject:lineModel];
         
     }
@@ -77,13 +53,35 @@
 
 #pragma mark - private method
 
+- (CGRect)getLineFrame:(CGFloat *)ascent descent:(CGFloat *)descent lineRef:(CTLineRef)lineRef origin:(CGPoint)origin {
+    
+    CGFloat leading;
+    CGFloat width = CTLineGetTypographicBounds(lineRef, ascent, descent, &leading);
+    CGFloat height = *ascent + *descent;
+    
+    CGFloat originx = origin.x + CGRectGetMinX([self getDrawRect]);
+    CGFloat originy = origin.y + CGRectGetMinY([self getDrawRect]) - *descent;
+    
+    return CGRectApplyAffineTransform(CGRectMake(originx, originy, width, height),[self transform]);
+    
+}
+
 - (CGAffineTransform)transform
 {
     CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
-
+    
     CGAffineTransform transform = CGAffineTransformMakeTranslation(0, configManager.height);//向上平移
     transform = CGAffineTransformScale(transform, 1.f, -1.f);//x轴旋转180
     return transform;
+}
+
+- (CFRange)rangeFromLineRef:(CTLineRef)lineRef{
+    return CTLineGetStringRange(lineRef);
+}
+
+- (CGRect)getDrawRect{
+    CGPathRef path = CTFrameGetPath(_frameRef);
+    return CGPathGetBoundingBox(path);
 }
 
 #pragma mark - getter
