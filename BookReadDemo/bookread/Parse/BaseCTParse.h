@@ -14,8 +14,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BaseCTParse : NSObject
+@interface BaseCTParse : NSObject<ICTParse>
 - (NSDictionary *)getDefaultTextAttributesDict;
 @end
+
+
 
 NS_ASSUME_NONNULL_END

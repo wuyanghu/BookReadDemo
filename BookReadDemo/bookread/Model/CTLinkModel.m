@@ -10,12 +10,12 @@
 
 @implementation CTLinkModel
 
-+ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(NSRange)range{
++ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(CFRange)range{
     CTLinkModel * linkModel = [CTLinkModel new];
     linkModel.title = title;
     linkModel.url   = url;
-    linkModel.range = range;
-    
+    linkModel.range = NSMakeRange(range.location, range.length);
+    linkModel.cfrange = range;
     return linkModel;
 }
 

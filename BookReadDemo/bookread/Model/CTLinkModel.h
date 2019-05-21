@@ -13,5 +13,6 @@
 @property (copy, nonatomic)NSString *title;
 @property (copy, nonatomic)NSString *url;
 @property (assign, nonatomic)NSRange range;
-+ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(NSRange)range;
+@property (assign, nonatomic)CFRange cfrange;
++ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(CFRange)range;
 @end

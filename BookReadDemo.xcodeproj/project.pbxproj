@@ -13,6 +13,7 @@
 		4B425AEB227E7A3100D8D094 /* CTRunModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AEA227E7A3100D8D094 /* CTRunModel.m */; };
 		4B425AEE227E8D9300D8D094 /* CTLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AED227E8D9300D8D094 /* CTLineModel.m */; };
 		4B425AF4227EC78500D8D094 /* CoreTextConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AF3227EC78500D8D094 /* CoreTextConstant.m */; };
+		4B988759229429FE00E3D1F4 /* ParseContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B988758229429FE00E3D1F4 /* ParseContext.m */; };
 		4BE18B67228FA2650005DF88 /* BastCTParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE18B66228FA2650005DF88 /* BastCTParse.m */; };
 		4BE3CB902272F3C9006607E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CB8F2272F3C9006607E4 /* AppDelegate.m */; };
 		4BE3CB932272F3C9006607E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CB922272F3C9006607E4 /* ViewController.m */; };
@@ -69,6 +70,8 @@
 		4B425AED227E8D9300D8D094 /* CTLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTLineModel.m; sourceTree = "<group>"; };
 		4B425AF0227EC71900D8D094 /* CoreTextConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextConstant.h; sourceTree = "<group>"; };
 		4B425AF3227EC78500D8D094 /* CoreTextConstant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextConstant.m; sourceTree = "<group>"; };
+		4B988757229429FE00E3D1F4 /* ParseContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseContext.h; sourceTree = "<group>"; };
+		4B988758229429FE00E3D1F4 /* ParseContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseContext.m; sourceTree = "<group>"; };
 		4BE18B60228FA1DB0005DF88 /* ICTParse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTParse.h; sourceTree = "<group>"; };
 		4BE18B65228FA2650005DF88 /* BaseCTParse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCTParse.h; sourceTree = "<group>"; };
 		4BE18B66228FA2650005DF88 /* BastCTParse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BastCTParse.m; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 				4B40B2F2228FA63A006FD4F2 /* ImageCTParse.m */,
 				4B40B2F4228FA770006FD4F2 /* BdgeCTParse.h */,
 				4B40B2F5228FA770006FD4F2 /* BdgeCTParse.m */,
+				4B988757229429FE00E3D1F4 /* ParseContext.h */,
+				4B988758229429FE00E3D1F4 /* ParseContext.m */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				4BE3CBEB2272F42A006607E4 /* UIViewController+Category.m in Sources */,
 				4BE3CB9E2272F3CA006607E4 /* main.m in Sources */,
 				4BE3CBDC2272F3DF006607E4 /* PageViewController.m in Sources */,
+				4B988759229429FE00E3D1F4 /* ParseContext.m in Sources */,
 				4BE3CBE22272F3DF006607E4 /* CTPageModel.m in Sources */,
 				4B425AF4227EC78500D8D094 /* CoreTextConstant.m in Sources */,
 				4BE3CBEA2272F42A006607E4 /* UIView+Frame.m in Sources */,

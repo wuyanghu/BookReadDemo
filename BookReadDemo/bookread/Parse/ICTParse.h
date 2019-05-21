@@ -8,16 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol ITextCTParse <NSObject>
+@protocol ICTParse <NSObject>
 
 @required
-- (NSAttributedString *)parseAttributeContentFromNSDictionary:(NSDictionary*)dict;
-
-@end
-
-@protocol IImageCTParse <NSObject>
-
-- (NSAttributedString *)setImagePositionDelegate:(NSDictionary *)dict;
+- (NSAttributedString *)parseDictionary:(NSDictionary*)dict;
 
 @end
 

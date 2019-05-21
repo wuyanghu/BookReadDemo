@@ -13,15 +13,11 @@
 #import "CTLinkModel.h"
 #import "CTPageModel.h"
 #import "CoreTextConstant.h"
-#import "TextCTParse.h"
-#import "ImageCTParse.h"
-#import "BdgeCTParse.h"
+#import "ParseContext.h"
 
 @interface CTModel()
 {
-    id<ITextCTParse> _textCTParse;
-    id<IImageCTParse> _imageCTParse;
-    id<IBdgeCTParse> _bdgeCTParse;
+
 }
 @end
 
@@ -30,9 +26,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _textCTParse = [TextCTParse new];
-        _imageCTParse = [ImageCTParse new];
-        _bdgeCTParse = [BdgeCTParse new];
+
     }
     return self;
 }
@@ -169,42 +163,34 @@
         
         if ([array isKindOfClass:[NSArray class]]) {
             for (NSDictionary *dict in array) {
-                
                 NSString *type = dict[@"type"];
-                
+                CFRange contentRange = CFRangeMake(result.length, [dict[@"content"] length]);
+                NSAttributedString * as;
                 if ([type isEqualToString:@"txt"]) {
-                    
-                    NSAttributedString * as = [_textCTParse parseAttributeContentFromNSDictionary:dict];
-                    [result appendAttributedString:as];
+                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[TextCTParse new]];
+                    [result appendAttributedString:[parseContext operate:dict]];
                     
                 }else if ([type isEqualToString:@"img"]){
-                    
-                    [self.imageArray addObject:[CTImageModel createImageModel:dict[@"name"] position:result.length]];
+                    CTImageModel * imageModel = [CTImageModel createImageModel:dict[@"name"] position:contentRange.location];
+                    [self.imageArray addObject:imageModel];
                     //创建空白占位符，并且设置它的CTRunDelegate信息
-                    NSAttributedString *as = [_imageCTParse setImagePositionDelegate:dict];
-                    [result appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-                    [result appendAttributedString:as];
+                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[ImageCTParse new]];
+                    [result appendAttributedString:[parseContext operate:dict]];
                 }else if ([type isEqualToString:@"link"]){
-                    
-                    NSUInteger startPos = result.length;
-                    NSAttributedString *as = [_textCTParse parseAttributeContentFromNSDictionary:dict];
-                    [result appendAttributedString:as];
-                    
-                    //创建CoreTextLinkData
-                    NSUInteger length = result.length - startPos;
-                    NSRange linkRange = NSMakeRange(startPos, length);
-                    
-                    CTLinkModel *linkData = [CTLinkModel createLinkModel:dict[@"content"] url:dict[@"url"] range:linkRange];
+                    CTLinkModel *linkData = [CTLinkModel createLinkModel:dict[@"content"] url:dict[@"url"] range:contentRange];
                     [self.linkArray addObject:linkData];
+                    
+                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[TextCTParse new]];
+                    [result appendAttributedString:[parseContext operate:dict]];
+                    
                 }else if ([type isEqualToString:@"sub"] || [type isEqualToString:@"sup"]){
-                    CFRange contentRange = CFRangeMake(result.length, [dict[@"content"] length]);
+                    BdgeCTParse * bdgeParse = [BdgeCTParse new];
+                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:bdgeParse];
+                    [result appendAttributedString:[parseContext operate:dict]];
                     
-                    NSAttributedString *as = [_textCTParse parseAttributeContentFromNSDictionary:dict];
-                    [result appendAttributedString:as];
-                    
-                    [_bdgeCTParse insertBadgeAttributedElement:dict result:result contentRange:contentRange];
+                    [bdgeParse insertBadgeAttributedElement:dict result:result contentRange:contentRange];
                 }else if ([type isEqualToString:@"line"]){
-                    NSAttributedString * as = [[NSAttributedString alloc] initWithString:@"\n"];
+                    as = [[NSAttributedString alloc] initWithString:@"\n"];
                     [result appendAttributedString:as];
                 }
             }

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseCTParse.h"
-#import "ICTParse.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TextCTParse : BaseCTParse<ITextCTParse>
+@interface TextCTParse : BaseCTParse
 
 @end
 

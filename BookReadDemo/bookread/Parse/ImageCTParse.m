@@ -25,7 +25,7 @@ static CGFloat widthCallback(void *ref){
     return [(NSNumber *)[(__bridge NSDictionary *)ref objectForKey:@"width"] floatValue];
 }
 
-- (NSAttributedString *)setImagePositionDelegate:(NSDictionary *)dict{
+- (NSAttributedString *)parseDictionary:(NSDictionary *)dict{
     
     CTRunDelegateCallbacks callbacks;
     memset(&callbacks, 0, sizeof(CTRunDelegateCallbacks));

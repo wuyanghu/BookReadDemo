@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageCTParse : BaseCTParse<IImageCTParse>
+@interface ImageCTParse : BaseCTParse<ICTParse>
 
 @end
 
