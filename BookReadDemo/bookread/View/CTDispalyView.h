@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CTPageModel.h"
-#import "CTModel.h"
+#import "CoreTextPageModel.h"
+#import "CoreTextModel.h"
 
 @interface CTDispalyView : UIView
-@property(strong,nonatomic) CTPageModel * pageModel;
-@property (nonatomic,strong) CTModel * coreTextModel;
+@property(strong,nonatomic) CoreTextPageModel * pageModel;
+@property (nonatomic,strong) CoreTextModel * coreTextModel;
 @end

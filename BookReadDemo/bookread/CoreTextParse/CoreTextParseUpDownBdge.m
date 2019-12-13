@@ -6,11 +6,11 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "BdgeCTParse.h"
+#import "CoreTextParseUpDownBdge.h"
 #import "CoreTextConstant.h"
 #import "CoreTextMacor.h"
 
-@implementation BdgeCTParse
+@implementation CoreTextParseUpDownBdge
 
 //添加角标属性
 - (void)insertBadgeAttributedElement:(NSDictionary*)dict result:(NSMutableAttributedString *)result contentRange:(CFRange)contentRange

@@ -12,14 +12,14 @@
 #import "CTLineModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CTPageModel : NSObject
+@interface CoreTextPageModel : NSObject
 @property (nonatomic,assign) CTFrameRef frameRef;
 @property (nonatomic,copy) NSAttributedString * content;
 
 @property (nonatomic,strong) NSMutableArray * imageArray;
 @property (nonatomic,strong) NSMutableArray<CTLineModel *> * lineArr;
 
-+ (CTPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString * )content;
++ (CoreTextPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString * )content;
 @end
 
 NS_ASSUME_NONNULL_END

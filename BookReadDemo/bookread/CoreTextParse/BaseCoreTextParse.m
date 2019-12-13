@@ -6,19 +6,20 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "BaseCTParse.h"
+#import "BaseCoreTextParse.h"
 
-@interface BaseCTParse()
+@interface BaseCoreTextParse()
 
 @end
 
-@implementation BaseCTParse
+@implementation BaseCoreTextParse
 
+//默认属性
 - (NSDictionary *)getDefaultTextAttributesDict{
     CTFrameConfigManager * config = [CTFrameConfigManager shareInstance];
-    CGFloat fontSize = config.fontSize;
+    CGFloat fontSize = config.fontSize;//字体大小
     CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"ArialMT", fontSize, NULL);
-    CGFloat lineSpcing = config.lineSpace;
+    CGFloat lineSpcing = config.lineSpace;//行间距
     const CFIndex kNumberOfSettings = 3;
     CTParagraphStyleSetting theSettings[kNumberOfSettings] = {
         {kCTParagraphStyleSpecifierLineSpacingAdjustment,sizeof(CGFloat),&lineSpcing},
@@ -27,19 +28,20 @@
     };
     
     CTParagraphStyleRef theParagraphRef = CTParagraphStyleCreate(theSettings, kNumberOfSettings);
-    UIColor *textColor = config.textColor;
+    UIColor *textColor = config.textColor;//字体颜色
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[(id)kCTForegroundColorAttributeName] = (id)textColor.CGColor;
-    dict[(id)kCTFontAttributeName] = (__bridge id)fontRef;
-    dict[(id)kCTParagraphStyleAttributeName] = (__bridge id)theParagraphRef;
+    dict[(id)kCTForegroundColorAttributeName] = (id)textColor.CGColor;//颜色
+    dict[(id)kCTFontAttributeName] = (__bridge id)fontRef;//字号
+    dict[(id)kCTParagraphStyleAttributeName] = (__bridge id)theParagraphRef;//段落属性
     
     CFRelease(fontRef);
     CFRelease(theParagraphRef);
     return dict;
 }
 
-- (NSAttributedString *)parseDictionary:(NSDictionary *)dict{
+//设置配置的属性:生成
+- (NSAttributedString *)attributedStringFromConfigDict:(NSDictionary *)dict{
     
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultTextAttributesDict]];
     

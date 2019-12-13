@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CTLinkModel.h"
-#import "CTModel.h"
+#import "CoreTextLinkModel.h"
+#import "CoreTextModel.h"
 #import <UIKit/UIKit.h>
 
 @interface CoreTextUtils : NSObject
@@ -20,6 +20,6 @@
  *  @param point 点击坐标
  *  @param data  数据源
  */
-+(CTLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CTPageModel *)pageModel coreTextModel:(CTModel *)coreTextModel;
++(CoreTextLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CoreTextPageModel *)pageModel coreTextModel:(CoreTextModel *)coreTextModel;
 
 @end

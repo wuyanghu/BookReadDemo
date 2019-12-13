@@ -6,12 +6,12 @@
 //  Copyright © 2016年 广州市东德网络科技有限公司. All rights reserved.
 //
 
-#import "CTImageModel.h"
+#import "CoreTextImageModel.h"
 
-@implementation CTImageModel
+@implementation CoreTextImageModel
 
-+ (CTImageModel *)createImageModel:(NSString *)name position:(NSInteger)position{
-    CTImageModel *imageData = [[CTImageModel alloc] init];
++ (CoreTextImageModel *)createImageModel:(NSString *)name position:(NSInteger)position{
+    CoreTextImageModel *imageData = [[CoreTextImageModel alloc] init];
     imageData.name = name;
     imageData.position = position;
     return imageData;

@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ICTParse.h"
+#import "CoreTextParseInterface.h"
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 #import "CTFrameConfigManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BaseCTParse : NSObject<ICTParse>
+@interface BaseCoreTextParse : NSObject<CoreTextParseInterface>
 - (NSDictionary *)getDefaultTextAttributesDict;
 @end
 

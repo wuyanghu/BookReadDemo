@@ -6,22 +6,22 @@
 //  Copyright © 2016年 广州市东德网络科技有限公司. All rights reserved.
 //
 
-#import "CTModel.h"
-#import "CTImageModel.h"
+#import "CoreTextModel.h"
+#import "CoreTextImageModel.h"
 #import "CTFrameConfigManager.h"
 
-#import "CTLinkModel.h"
-#import "CTPageModel.h"
+#import "CoreTextLinkModel.h"
+#import "CoreTextPageModel.h"
 #import "CoreTextConstant.h"
-#import "ParseContext.h"
+#import "CoreTextParseContext.h"
 
-@interface CTModel()
+@interface CoreTextModel()
 {
 
 }
 @end
 
-@implementation CTModel
+@implementation CoreTextModel
 
 - (instancetype)init{
     self = [super init];
@@ -46,7 +46,7 @@
             //生成frame
             CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), pathRef, NULL);
             
-            CTPageModel * pageModel = [CTPageModel createPageModel:frameRef content:content];
+            CoreTextPageModel * pageModel = [CoreTextPageModel createPageModel:frameRef content:content];
             [self.pageDataArray addObject:pageModel];
             //移动当前文本位置
             textPos += [self rangeFromFrameRef:frameRef].length;
@@ -69,10 +69,10 @@
         return;
     }
     
-    CTImageModel * imageData = self.imageArray[0];
+    CoreTextImageModel * imageData = self.imageArray[0];
     NSUInteger imgIndex = 0;
     
-    for (CTPageModel * pageModel in self.pageDataArray) {
+    for (CoreTextPageModel * pageModel in self.pageDataArray) {
         CTFrameRef frameRef = pageModel.frameRef;
         
         NSArray *lines = (NSArray *)CTFrameGetLines(frameRef);
@@ -146,7 +146,7 @@
 - (CTRunRef)runRefFromRunObj:(id)runObj{
     return (__bridge CTRunRef)runObj;
 }
-
+//NSAttributedString转CFAttributedStringRef
 - (CFAttributedStringRef)stringRefFromString:(NSAttributedString *)content{
     return (__bridge CFAttributedStringRef)content;
 }
@@ -167,26 +167,26 @@
                 CFRange contentRange = CFRangeMake(result.length, [dict[@"content"] length]);
                 NSAttributedString * as;
                 if ([type isEqualToString:@"txt"]) {
-                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[TextCTParse new]];
-                    [result appendAttributedString:[parseContext operate:dict]];
+                    CoreTextParseContext * parseContext = [[CoreTextParseContext alloc] initWithParse:[BaseCoreTextParse new]];
+                    [result appendAttributedString:[parseContext praseDict:dict]];
                     
                 }else if ([type isEqualToString:@"img"]){
-                    CTImageModel * imageModel = [CTImageModel createImageModel:dict[@"name"] position:contentRange.location];
+                    CoreTextImageModel * imageModel = [CoreTextImageModel createImageModel:dict[@"name"] position:contentRange.location];
                     [self.imageArray addObject:imageModel];
                     //创建空白占位符，并且设置它的CTRunDelegate信息
-                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[ImageCTParse new]];
-                    [result appendAttributedString:[parseContext operate:dict]];
+                    CoreTextParseContext * parseContext = [[CoreTextParseContext alloc] initWithParse:[CoreTextParseImage new]];
+                    [result appendAttributedString:[parseContext praseDict:dict]];
                 }else if ([type isEqualToString:@"link"]){
-                    CTLinkModel *linkData = [CTLinkModel createLinkModel:dict[@"content"] url:dict[@"url"] range:contentRange];
+                    CoreTextLinkModel *linkData = [CoreTextLinkModel createLinkModel:dict[@"content"] url:dict[@"url"] range:contentRange];
                     [self.linkArray addObject:linkData];
                     
-                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:[TextCTParse new]];
-                    [result appendAttributedString:[parseContext operate:dict]];
+                    CoreTextParseContext * parseContext = [[CoreTextParseContext alloc] initWithParse:[BaseCoreTextParse new]];
+                    [result appendAttributedString:[parseContext praseDict:dict]];
                     
                 }else if ([type isEqualToString:@"sub"] || [type isEqualToString:@"sup"]){
-                    BdgeCTParse * bdgeParse = [BdgeCTParse new];
-                    ParseContext * parseContext = [[ParseContext alloc] initWithParse:bdgeParse];
-                    [result appendAttributedString:[parseContext operate:dict]];
+                    CoreTextParseUpDownBdge * bdgeParse = [CoreTextParseUpDownBdge new];
+                    CoreTextParseContext * parseContext = [[CoreTextParseContext alloc] initWithParse:bdgeParse];
+                    [result appendAttributedString:[parseContext praseDict:dict]];
                     
                     [bdgeParse insertBadgeAttributedElement:dict result:result contentRange:contentRange];
                 }else if ([type isEqualToString:@"line"]){
@@ -201,21 +201,21 @@
 
 #pragma mark - getter
 
-- (NSMutableArray<CTImageModel *> *)imageArray{
+- (NSMutableArray<CoreTextImageModel *> *)imageArray{
     if (!_imageArray) {
         _imageArray = [NSMutableArray new];
     }
     return _imageArray;
 }
 
-- (NSMutableArray<CTLinkModel *> *)linkArray{
+- (NSMutableArray<CoreTextLinkModel *> *)linkArray{
     if (!_linkArray) {
         _linkArray = [NSMutableArray new];
     }
     return _linkArray;
 }
 
-- (NSMutableArray<CTPageModel *> *)pageDataArray{
+- (NSMutableArray<CoreTextPageModel *> *)pageDataArray{
     if (!_pageDataArray) {
         _pageDataArray = [NSMutableArray new];
     }

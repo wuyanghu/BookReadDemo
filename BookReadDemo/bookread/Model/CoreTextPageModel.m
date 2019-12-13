@@ -6,15 +6,15 @@
 //  Copyright © 2018 wupeng. All rights reserved.
 //
 
-#import "CTPageModel.h"
+#import "CoreTextPageModel.h"
 #import "CTFrameConfigManager.h"
 #import "CoreTextConstant.h"
 
-@interface CTPageModel ()
+@interface CoreTextPageModel ()
 
 @end
 
-@implementation CTPageModel
+@implementation CoreTextPageModel
 
 - (void)setFrameRef:(CTFrameRef)frameRef{
     if (_frameRef != frameRef) {
@@ -101,8 +101,8 @@
 }
 
 #pragma mark - 简单工厂模式
-+ (CTPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString *)content{
-    CTPageModel * pageModel = [CTPageModel new];
++ (CoreTextPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString *)content{
+    CoreTextPageModel * pageModel = [CoreTextPageModel new];
     pageModel.content = content;
     pageModel.frameRef = frameRef;
     

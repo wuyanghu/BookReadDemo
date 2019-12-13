@@ -6,12 +6,12 @@
 //  Copyright © 2016年 广州市东德网络科技有限公司. All rights reserved.
 //
 
-#import "CTLinkModel.h"
+#import "CoreTextLinkModel.h"
 
-@implementation CTLinkModel
+@implementation CoreTextLinkModel
 
-+ (CTLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(CFRange)range{
-    CTLinkModel * linkModel = [CTLinkModel new];
++ (CoreTextLinkModel *)createLinkModel:(NSString *)title url:(NSString *)url range:(CFRange)range{
+    CoreTextLinkModel * linkModel = [CoreTextLinkModel new];
     linkModel.title = title;
     linkModel.url   = url;
     linkModel.range = NSMakeRange(range.location, range.length);

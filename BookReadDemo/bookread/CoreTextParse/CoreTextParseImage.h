@@ -6,11 +6,11 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "BaseCTParse.h"
+#import "BaseCoreTextParse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageCTParse : BaseCTParse<ICTParse>
+@interface CoreTextParseImage : BaseCoreTextParse<CoreTextParseInterface>
 
 @end
 

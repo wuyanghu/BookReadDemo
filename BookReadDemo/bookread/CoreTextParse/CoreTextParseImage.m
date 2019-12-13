@@ -6,26 +6,25 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "ImageCTParse.h"
+#import "CoreTextParseImage.h"
 
-@implementation ImageCTParse
+@implementation CoreTextParseImage
 
 #pragma mark - 添加设置CTRunDelegate信息的方法
 
-static CGFloat ascentCallback(void *ref){
-    
-    return [(NSNumber *)[(__bridge NSDictionary *)ref objectForKey:@"height"] floatValue];
-}
 static CGFloat descentCallback(void *ref){
-    
     return 0;
 }
+
 static CGFloat widthCallback(void *ref){
-    
     return [(NSNumber *)[(__bridge NSDictionary *)ref objectForKey:@"width"] floatValue];
 }
 
-- (NSAttributedString *)parseDictionary:(NSDictionary *)dict{
+static CGFloat ascentCallback(void *ref){
+    return [(NSNumber *)[(__bridge NSDictionary *)ref objectForKey:@"height"] floatValue];
+}
+
+- (NSAttributedString *)attributedStringFromConfigDict:(NSDictionary *)dict{
     
     CTRunDelegateCallbacks callbacks;
     memset(&callbacks, 0, sizeof(CTRunDelegateCallbacks));

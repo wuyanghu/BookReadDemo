@@ -7,10 +7,10 @@
 //
 
 #import "CTDispalyView.h"
-#import "CTImageModel.h"
-#import "CTLinkModel.h"
+#import "CoreTextImageModel.h"
+#import "CoreTextLinkModel.h"
 #import "CoreTextUtils.h"
-#import "CTPageModel.h"
+#import "CoreTextPageModel.h"
 #import "CTFrameConfigManager.h"
 //导入CoreText系统框架
 #import <CoreText/CoreText.h>
@@ -48,7 +48,7 @@
     CGPoint point = [recognizer locationInView:self];
     
     //点击图片
-    for (CTImageModel *imagData in self.pageModel.imageArray) {
+    for (CoreTextImageModel *imagData in self.pageModel.imageArray) {
         
         //翻转坐标系，因为ImageData中的坐标是CoreText的坐标系
         CGRect imageRect = imagData.imagePostion;
@@ -66,7 +66,7 @@
     }
     
     //点击链接
-    CTLinkModel *linkData = [CoreTextUtils touchLinkInView:self atPoint:point data:self.pageModel coreTextModel:_coreTextModel];
+    CoreTextLinkModel *linkData = [CoreTextUtils touchLinkInView:self atPoint:point data:self.pageModel coreTextModel:_coreTextModel];
     if (linkData) {
         [self showTapLink:linkData.url];
         return;
@@ -150,7 +150,7 @@
         }
     }
     
-    for (CTImageModel * imageData in self.pageModel.imageArray) {
+    for (CoreTextImageModel * imageData in self.pageModel.imageArray) {
         UIImage *image = [UIImage imageNamed:imageData.name];
         CGContextDrawImage(context, imageData.imagePostion, image.CGImage);
     }

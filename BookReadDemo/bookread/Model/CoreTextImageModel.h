@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface CTImageModel : NSObject
+@interface CoreTextImageModel : NSObject
 
 //图片资源名称
 @property (copy,nonatomic)NSString *name;
@@ -18,6 +18,6 @@
 //图片的尺寸
 @property (assign,nonatomic)CGRect imagePostion;
 
-+ (CTImageModel *)createImageModel:(NSString *)name position:(NSInteger)position;
++ (CoreTextImageModel *)createImageModel:(NSString *)name position:(NSInteger)position;
 
 @end

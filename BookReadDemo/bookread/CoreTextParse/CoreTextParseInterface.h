@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol ICTParse <NSObject>
+@protocol CoreTextParseInterface <NSObject>
 
 @required
-- (NSAttributedString *)parseDictionary:(NSDictionary*)dict;
+- (NSAttributedString *)attributedStringFromConfigDict:(NSDictionary*)dict;
 
 @end
 

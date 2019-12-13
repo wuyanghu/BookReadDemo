@@ -6,11 +6,11 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "BaseCTParse.h"
+#import "BaseCoreTextParse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BdgeCTParse : BaseCTParse<IBdgeCTParse>
+@interface CoreTextParseUpDownBdge : BaseCoreTextParse<IBdgeCTParse>
 
 @end
 

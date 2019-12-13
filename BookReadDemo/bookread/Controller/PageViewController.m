@@ -9,16 +9,15 @@
 #import "PageViewController.h"
 #import "PageDetailViewController.h"
 #import "CTFrameConfigManager.h"
-#import "CTFrameParser.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @interface PageViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 {
-    CTModel * _coreTextData;
+    CoreTextModel * _coreTextData;
     BOOL _isAfterPage;
 }
 @property(nonatomic ,strong) UIPageViewController *pageViewController;
-@property(nonatomic ,strong) NSMutableArray<PageDetailViewController *> * dataArray;
+@property(nonatomic ,strong) NSMutableArray<PageDetailViewController *> * dataArray;//翻页的view
 @end
 
 @implementation PageViewController
@@ -37,37 +36,23 @@
     [self setTitle:@"阅读翻页"];
 
     //添加pageViewController到Controller
-    [self addPageViewControllerToSelf];
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
     
-    _coreTextData = [self paresBookReadFile];
-
+    [self parseBookReadJson];
     [[self getPageDetailVC:0] refreshViewWithIndex:[self getConfigManager].indexPage coreTextModel:_coreTextData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - private method
-
-- (void)addPageViewControllerToSelf{
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
-}
 
 - (CTFrameConfigManager *)getConfigManager{
     return [CTFrameConfigManager shareInstance];
 }
 
-- (CTModel *)paresBookReadFile{
-    CTFrameParser * parserCT = [CTFrameParser new];
-    [parserCT parseBookReadFile:[self readConfigBookReadFile]];
-    return parserCT.getCTModel;
-}
-
-- (NSString *)readConfigBookReadFile{
-    return [[NSBundle mainBundle] pathForResource:@"JsonTemplate" ofType:@"json"];
+- (void)parseBookReadJson{
+    _coreTextData = [CoreTextModel new];
+    NSString * bookJosn = [[NSBundle mainBundle] pathForResource:@"JsonTemplate" ofType:@"json"];
+    [_coreTextData calculatePageArray:bookJosn];
 }
 
 - (BOOL)indexOverBorderDataArr:(NSArray *)dataArr index:(NSInteger)index{
@@ -239,15 +224,5 @@
 {
     return [self.dataArray indexOfObject:vc];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
