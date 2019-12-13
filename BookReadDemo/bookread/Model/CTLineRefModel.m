@@ -6,11 +6,11 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "CTLineModel.h"
+#import "CTLineRefModel.h"
 #import <UIKit/UIKit.h>
 #import "CoreTextConstant.h"
 
-@interface CTLineModel ()
+@interface CTLineRefModel ()
 {
     CTLineRef _lineRef;
     CGFloat _ascent;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation CTLineModel
+@implementation CTLineRefModel
 
 //初始化textline
 - (instancetype)initWithLineRef:(CTLineRef)lineRef{
@@ -102,7 +102,7 @@
         CGFloat originy = CGRectGetMaxY(self.lineFrame) - runOrigin.y - height;
         CGRect runFrame = CGRectMake(originx, originy, runWidth, height);
         
-        CTRunModel * runModel = [[CTRunModel alloc] initWithRunRef:runRef textLine:self];
+        CTRunRefModel * runModel = [[CTRunRefModel alloc] initWithRunRef:runRef textLine:self];
         
         //有角标获取当前line的最小Y和最大height 选中用
         NSDictionary *attributes = runModel.attributes;
@@ -126,7 +126,7 @@
 
 #pragma mark - getter
 
-- (NSMutableArray<CTRunModel *> *)runArr{
+- (NSMutableArray<CTRunRefModel *> *)runArr{
     if (!_runArr) {
         _runArr = [[NSMutableArray alloc] init];
     }
@@ -135,8 +135,8 @@
 
 #pragma mark - static method
 
-+ (CTLineModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex {
-    CTLineModel * lineModel = [[CTLineModel alloc] initWithLineRef:lineRef];
++ (CTLineRefModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex {
+    CTLineRefModel * lineModel = [[CTLineRefModel alloc] initWithLineRef:lineRef];
     lineModel.baseLine = (ascent + descent) /2 - descent;
     lineModel.baselineOrigin = CGPointMake(lineFrame->origin.x, lineFrame->origin.y + ascent);
     lineModel.lineFrame = *lineFrame;

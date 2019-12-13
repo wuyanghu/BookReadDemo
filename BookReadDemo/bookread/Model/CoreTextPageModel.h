@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
-#import "CTRunModel.h"
-#import "CTLineModel.h"
+#import "CTRunRefModel.h"
+#import "CTLineRefModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CoreTextPageModel : NSObject
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSAttributedString * content;
 
 @property (nonatomic,strong) NSMutableArray * imageArray;
-@property (nonatomic,strong) NSMutableArray<CTLineModel *> * lineArr;
+@property (nonatomic,strong) NSMutableArray<CTLineRefModel *> * lineArr;
 
 + (CoreTextPageModel *)createPageModel:(CTFrameRef)frameRef content:(NSAttributedString * )content;
 @end

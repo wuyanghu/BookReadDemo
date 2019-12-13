@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
-@class CTLineModel;
+@class CTLineRefModel;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CTRunModel : NSObject
+@interface CTRunRefModel : NSObject
 
 /**
  The ascent (height above the baseline) of the receiver
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSDictionary *attributes;
 @property (nonatomic, assign) CGRect runFrame;
 
-- (instancetype)initWithRunRef:(CTRunRef)runRef textLine:(CTLineModel *)textLine;
+- (instancetype)initWithRunRef:(CTRunRef)runRef textLine:(CTLineRefModel *)textLine;
 - (void)drawInContext:(CGContextRef)context;
 - (CGRect)frameOfGlyphAtIndex:(NSInteger)index;
 @end

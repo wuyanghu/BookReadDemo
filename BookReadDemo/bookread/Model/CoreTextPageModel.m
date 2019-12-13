@@ -45,7 +45,7 @@
         
         CFRange cfRange = [self rangeFromLineRef:lineRef];
         NSRange lineRange = NSMakeRange(cfRange.location, cfRange.length);
-        CTLineModel * lineModel = [CTLineModel createLineModel:ascent cfAttributedString:cfAttributedString cfRange:&cfRange descent:descent lineFrame:&lineFrame lineRange:&lineRange lineRef:lineRef maxIndex:maxIndex];
+        CTLineRefModel * lineModel = [CTLineRefModel createLineModel:ascent cfAttributedString:cfAttributedString cfRange:&cfRange descent:descent lineFrame:&lineFrame lineRange:&lineRange lineRef:lineRef maxIndex:maxIndex];
         [self.lineArr addObject:lineModel];
         
     }
@@ -86,7 +86,7 @@
 
 #pragma mark - getter
 
-- (NSMutableArray<CTLineModel *> *)lineArr{
+- (NSMutableArray<CTLineRefModel *> *)lineArr{
     if (!_lineArr) {
         _lineArr = [[NSMutableArray alloc] init];
     }

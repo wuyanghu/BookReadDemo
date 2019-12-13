@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "CTRunModel.h"
+#import "CTRunRefModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CTLineModel : NSObject
+@interface CTLineRefModel : NSObject
 
 @property (nonatomic, assign) NSRange stringRange; // string range
 
@@ -44,13 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CFRange attributedRange;
 
-@property (nonatomic,strong) NSMutableArray<CTRunModel *> * runArr;
+@property (nonatomic,strong) NSMutableArray<CTRunRefModel *> * runArr;
 @property (nonatomic, copy) NSAttributedString *attributedString;
 //初始化textline
 - (instancetype)initWithLineRef:(CTLineRef)lineRef;
 - (void)buildGlyphRuns;
 
-+ (CTLineModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex;
++ (CTLineRefModel *)createLineModel:(CGFloat)ascent cfAttributedString:(CFMutableAttributedStringRef)cfAttributedString cfRange:(const CFRange *)cfRange descent:(CGFloat)descent lineFrame:(const CGRect *)lineFrame lineRange:(const NSRange *)lineRange lineRef:(CTLineRef)lineRef maxIndex:(CFIndex)maxIndex;
 @end
 
 NS_ASSUME_NONNULL_END

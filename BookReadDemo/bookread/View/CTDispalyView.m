@@ -140,8 +140,8 @@
     CGContextScaleCTM(context, 1.0, -1.0);
     
     NSArray * lineArr = self.pageModel.lineArr;
-    for (CTLineModel *oneLine in lineArr){
-        for (CTRunModel *oneRun in oneLine.runArr) {
+    for (CTLineRefModel *oneLine in lineArr){
+        for (CTRunRefModel *oneRun in oneLine.runArr) {
             
             CGFloat y = [oneRun frameOfGlyphAtIndex:0].origin.y;
             CGPoint textPosition = CGPointMake(oneLine.lineFrame.origin.x, configManager.height - y - oneRun.ascent);

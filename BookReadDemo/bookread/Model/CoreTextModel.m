@@ -151,9 +151,8 @@
     return (__bridge CFAttributedStringRef)content;
 }
 
-#pragma mark - 解析
+#pragma mark - 字符string转换attributedString
 
-//字符string转换attributedString
 - (NSAttributedString *)convertAttributedContent:(NSString *)path{
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];

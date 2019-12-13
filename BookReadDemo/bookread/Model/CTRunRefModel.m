@@ -6,17 +6,17 @@
 //  Copyright © 2019 wupeng. All rights reserved.
 //
 
-#import "CTRunModel.h"
-#import "CTLineModel.h"
+#import "CTRunRefModel.h"
+#import "CTLineRefModel.h"
 #import <UIKit/UIKit.h>
 #import "CoreTextConstant.h"
 
-@interface CTRunModel ()
+@interface CTRunRefModel ()
 {
     BOOL _didCalculateMetrics;
     CGFloat _offset; // x distance from line origin
 }
-@property (nonatomic, weak, readonly) CTLineModel *textLine;
+@property (nonatomic, weak, readonly) CTLineRefModel *textLine;
 @property (nonatomic, assign, readwrite) CTRunRef runRef;
 @property (nonatomic, readwrite) CGFloat ascent;
 @property (nonatomic, readwrite) CGFloat descent;
@@ -28,9 +28,9 @@
 
 @end
 
-@implementation CTRunModel
+@implementation CTRunRefModel
 
-- (instancetype)initWithRunRef:(CTRunRef)runRef textLine:(CTLineModel *)textLine{
+- (instancetype)initWithRunRef:(CTRunRef)runRef textLine:(CTLineRefModel *)textLine{
     if (self = [super init]) {
         _textLine = textLine;
         self.runRef = runRef;

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		4B40B2F3228FA63A006FD4F2 /* CoreTextParseImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B40B2F2228FA63A006FD4F2 /* CoreTextParseImage.m */; };
 		4B40B2F6228FA770006FD4F2 /* CoreTextParseUpDownBdge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B40B2F5228FA770006FD4F2 /* CoreTextParseUpDownBdge.m */; };
-		4B425AEB227E7A3100D8D094 /* CTRunModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AEA227E7A3100D8D094 /* CTRunModel.m */; };
-		4B425AEE227E8D9300D8D094 /* CTLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AED227E8D9300D8D094 /* CTLineModel.m */; };
 		4B425AF4227EC78500D8D094 /* CoreTextConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B425AF3227EC78500D8D094 /* CoreTextConstant.m */; };
 		4B988759229429FE00E3D1F4 /* CoreTextParseContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B988758229429FE00E3D1F4 /* CoreTextParseContext.m */; };
 		4BE18B67228FA2650005DF88 /* BaseCoreTextParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE18B66228FA2650005DF88 /* BaseCoreTextParse.m */; };
@@ -32,7 +30,8 @@
 		4BE3CBE22272F3DF006607E4 /* CoreTextPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBD02272F3DF006607E4 /* CoreTextPageModel.m */; };
 		4BE3CBE32272F3DF006607E4 /* CTDispalyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBD22272F3DF006607E4 /* CTDispalyView.m */; };
 		4BE3CBE42272F3DF006607E4 /* CoreTextUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBD62272F3DF006607E4 /* CoreTextUtils.m */; };
-		4BE3CBEA2272F42A006607E4 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBE72272F42A006607E4 /* UIView+Frame.m */; };
+		760AF37E23A3CA4500A94169 /* CTLineRefModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 760AF37C23A3CA4500A94169 /* CTLineRefModel.m */; };
+		760AF38123A3CA7000A94169 /* CTRunRefModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 760AF37F23A3CA7000A94169 /* CTRunRefModel.m */; };
 		D56C5749521ACF4B1F64F1D4 /* libPods-BookReadDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF3A65B31E68B8D926A0B86 /* libPods-BookReadDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -59,10 +58,6 @@
 		4B40B2F2228FA63A006FD4F2 /* CoreTextParseImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextParseImage.m; sourceTree = "<group>"; };
 		4B40B2F4228FA770006FD4F2 /* CoreTextParseUpDownBdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextParseUpDownBdge.h; sourceTree = "<group>"; };
 		4B40B2F5228FA770006FD4F2 /* CoreTextParseUpDownBdge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextParseUpDownBdge.m; sourceTree = "<group>"; };
-		4B425AE9227E7A3100D8D094 /* CTRunModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTRunModel.h; sourceTree = "<group>"; };
-		4B425AEA227E7A3100D8D094 /* CTRunModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTRunModel.m; sourceTree = "<group>"; };
-		4B425AEC227E8D9300D8D094 /* CTLineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTLineModel.h; sourceTree = "<group>"; };
-		4B425AED227E8D9300D8D094 /* CTLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTLineModel.m; sourceTree = "<group>"; };
 		4B425AF0227EC71900D8D094 /* CoreTextConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextConstant.h; sourceTree = "<group>"; };
 		4B425AF3227EC78500D8D094 /* CoreTextConstant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextConstant.m; sourceTree = "<group>"; };
 		4B988757229429FE00E3D1F4 /* CoreTextParseContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextParseContext.h; sourceTree = "<group>"; };
@@ -106,9 +101,11 @@
 		4BE3CBD62272F3DF006607E4 /* CoreTextUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextUtils.m; sourceTree = "<group>"; };
 		4BE3CBD82272F3DF006607E4 /* CoreTextMacor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextMacor.h; sourceTree = "<group>"; };
 		4BE3CBDA2272F3DF006607E4 /* CoreTextUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextUtils.h; sourceTree = "<group>"; };
-		4BE3CBE62272F42A006607E4 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		4BE3CBE72272F42A006607E4 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		4BF3A65B31E68B8D926A0B86 /* libPods-BookReadDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BookReadDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		760AF37C23A3CA4500A94169 /* CTLineRefModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTLineRefModel.m; sourceTree = "<group>"; };
+		760AF37D23A3CA4500A94169 /* CTLineRefModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTLineRefModel.h; sourceTree = "<group>"; };
+		760AF37F23A3CA7000A94169 /* CTRunRefModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRunRefModel.m; sourceTree = "<group>"; };
+		760AF38023A3CA7000A94169 /* CTRunRefModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRunRefModel.h; sourceTree = "<group>"; };
 		AF4E69CFC978C30B8B8E9187 /* Pods-BookReadDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookReadDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookReadDemo/Pods-BookReadDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,8 +194,6 @@
 		4BE3CB8D2272F3C9006607E4 /* BookReadDemo */ = {
 			isa = PBXGroup;
 			children = (
-				4BE3CBE62272F42A006607E4 /* UIView+Frame.h */,
-				4BE3CBE72272F42A006607E4 /* UIView+Frame.m */,
 				4BE3CBC02272F3DF006607E4 /* bookread */,
 				4BE3CB8E2272F3C9006607E4 /* AppDelegate.h */,
 				4BE3CB8F2272F3C9006607E4 /* AppDelegate.m */,
@@ -262,12 +257,12 @@
 			children = (
 				4BE3CBC82272F3DF006607E4 /* CoreTextModel.h */,
 				4BE3CBCD2272F3DF006607E4 /* CoreTextModel.m */,
+				760AF38023A3CA7000A94169 /* CTRunRefModel.h */,
+				760AF37F23A3CA7000A94169 /* CTRunRefModel.m */,
+				760AF37D23A3CA4500A94169 /* CTLineRefModel.h */,
+				760AF37C23A3CA4500A94169 /* CTLineRefModel.m */,
 				4BE3CBCB2272F3DF006607E4 /* CoreTextPageModel.h */,
 				4BE3CBD02272F3DF006607E4 /* CoreTextPageModel.m */,
-				4B425AEC227E8D9300D8D094 /* CTLineModel.h */,
-				4B425AED227E8D9300D8D094 /* CTLineModel.m */,
-				4B425AE9227E7A3100D8D094 /* CTRunModel.h */,
-				4B425AEA227E7A3100D8D094 /* CTRunModel.m */,
 				4BE3CBCA2272F3DF006607E4 /* CoreTextLinkModel.h */,
 				4BE3CBCE2272F3DF006607E4 /* CoreTextLinkModel.m */,
 				4BE3CBCC2272F3DF006607E4 /* JsonTemplate.json */,
@@ -482,8 +477,6 @@
 				4BE3CBDB2272F3DF006607E4 /* CTFrameConfigManager.m in Sources */,
 				4BE18B67228FA2650005DF88 /* BaseCoreTextParse.m in Sources */,
 				4B40B2F6228FA770006FD4F2 /* CoreTextParseUpDownBdge.m in Sources */,
-				4B425AEE227E8D9300D8D094 /* CTLineModel.m in Sources */,
-				4B425AEB227E7A3100D8D094 /* CTRunModel.m in Sources */,
 				4BE3CBE32272F3DF006607E4 /* CTDispalyView.m in Sources */,
 				4BE3CB932272F3C9006607E4 /* ViewController.m in Sources */,
 				4BE3CBE02272F3DF006607E4 /* CoreTextLinkModel.m in Sources */,
@@ -492,10 +485,11 @@
 				4B988759229429FE00E3D1F4 /* CoreTextParseContext.m in Sources */,
 				4BE3CBE22272F3DF006607E4 /* CoreTextPageModel.m in Sources */,
 				4B425AF4227EC78500D8D094 /* CoreTextConstant.m in Sources */,
-				4BE3CBEA2272F42A006607E4 /* UIView+Frame.m in Sources */,
 				4BE3CBE12272F3DF006607E4 /* CoreTextImageModel.m in Sources */,
+				760AF38123A3CA7000A94169 /* CTRunRefModel.m in Sources */,
 				4BE3CB902272F3C9006607E4 /* AppDelegate.m in Sources */,
 				4BE3CBDF2272F3DF006607E4 /* CoreTextModel.m in Sources */,
+				760AF37E23A3CA4500A94169 /* CTLineRefModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
