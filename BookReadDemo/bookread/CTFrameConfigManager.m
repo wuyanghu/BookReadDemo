@@ -33,7 +33,7 @@
     }
     return self;
 }
-
+//绘制的区域
 - (CGRect)getDrawCTFrame{
     return CGRectMake(20, 0, self.width-40, self.height);
 }

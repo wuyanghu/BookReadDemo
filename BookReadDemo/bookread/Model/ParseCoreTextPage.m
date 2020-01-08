@@ -6,7 +6,7 @@
 //  Copyright © 2016年 广州市东德网络科技有限公司. All rights reserved.
 //
 
-#import "CoreTextModel.h"
+#import "ParseCoreTextPage.h"
 #import "CoreTextImageModel.h"
 #import "CTFrameConfigManager.h"
 
@@ -15,13 +15,13 @@
 #import "CoreTextConstant.h"
 #import "CoreTextParseContext.h"
 
-@interface CoreTextModel()
+@interface ParseCoreTextPage()
 {
 
 }
 @end
 
-@implementation CoreTextModel
+@implementation ParseCoreTextPage
 
 - (instancetype)init{
     self = [super init];
@@ -34,14 +34,17 @@
 - (void)calculatePageArray:(NSString *)path{
     NSAttributedString *content = [self convertAttributedContent:path];
     
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString([self stringRefFromString:content]);
+    //NSAttributedString转CFAttributedStringRef
+    CFAttributedStringRef contentRef = (__bridge CFAttributedStringRef)content;
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(contentRef);
     NSUInteger textPos = 0;
     NSUInteger totalPage = 0;
     
+    CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
     @autoreleasepool {
-        while (textPos < content.length)  {
+        while (textPos<content.length)  {
             //设置路径
-            CGPathRef pathRef = [self pathRefFromPath];
+            CGPathRef pathRef = CGPathCreateWithRect(configManager.getDrawCTFrame, NULL);
             
             //生成frame
             CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), pathRef, NULL);
@@ -49,12 +52,10 @@
             CoreTextPageModel * pageModel = [CoreTextPageModel createPageModel:frameRef content:content];
             [self.pageDataArray addObject:pageModel];
             //移动当前文本位置
-            textPos += [self rangeFromFrameRef:frameRef].length;
+            textPos += CTFrameGetVisibleStringRange(frameRef).length;
             
             CGPathRelease(pathRef);
             totalPage++;
-            
-            
         };
     };
     
@@ -134,21 +135,8 @@
     return (__bridge CTRunDelegateRef)[runAttributes valueForKey:(id)kCTRunDelegateAttributeName];//判断是否有占位
 }
 
-- (CFRange)rangeFromFrameRef:(CTFrameRef)frameRef{
-    return CTFrameGetVisibleStringRange(frameRef);
-}
-
-- (CGPathRef)pathRefFromPath{
-    CTFrameConfigManager * configManager = [CTFrameConfigManager shareInstance];
-    return CGPathCreateWithRect(configManager.getDrawCTFrame, NULL);
-}
-
 - (CTRunRef)runRefFromRunObj:(id)runObj{
     return (__bridge CTRunRef)runObj;
-}
-//NSAttributedString转CFAttributedStringRef
-- (CFAttributedStringRef)stringRefFromString:(NSAttributedString *)content{
-    return (__bridge CFAttributedStringRef)content;
 }
 
 #pragma mark - 字符string转换attributedString

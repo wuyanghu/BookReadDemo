@@ -24,7 +24,7 @@
 		4BE3CBDC2272F3DF006607E4 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBC32272F3DF006607E4 /* PageViewController.m */; };
 		4BE3CBDD2272F3DF006607E4 /* PageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBC62272F3DF006607E4 /* PageDetailViewController.m */; };
 		4BE3CBDE2272F3DF006607E4 /* JsonTemplate.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3CBCC2272F3DF006607E4 /* JsonTemplate.json */; };
-		4BE3CBDF2272F3DF006607E4 /* CoreTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBCD2272F3DF006607E4 /* CoreTextModel.m */; };
+		4BE3CBDF2272F3DF006607E4 /* ParseCoreTextPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBCD2272F3DF006607E4 /* ParseCoreTextPage.m */; };
 		4BE3CBE02272F3DF006607E4 /* CoreTextLinkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBCE2272F3DF006607E4 /* CoreTextLinkModel.m */; };
 		4BE3CBE12272F3DF006607E4 /* CoreTextImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBCF2272F3DF006607E4 /* CoreTextImageModel.m */; };
 		4BE3CBE22272F3DF006607E4 /* CoreTextPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3CBD02272F3DF006607E4 /* CoreTextPageModel.m */; };
@@ -86,12 +86,12 @@
 		4BE3CBC42272F3DF006607E4 /* PageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageDetailViewController.h; sourceTree = "<group>"; };
 		4BE3CBC52272F3DF006607E4 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		4BE3CBC62272F3DF006607E4 /* PageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageDetailViewController.m; sourceTree = "<group>"; };
-		4BE3CBC82272F3DF006607E4 /* CoreTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextModel.h; sourceTree = "<group>"; };
+		4BE3CBC82272F3DF006607E4 /* ParseCoreTextPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseCoreTextPage.h; sourceTree = "<group>"; };
 		4BE3CBC92272F3DF006607E4 /* CoreTextImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextImageModel.h; sourceTree = "<group>"; };
 		4BE3CBCA2272F3DF006607E4 /* CoreTextLinkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextLinkModel.h; sourceTree = "<group>"; };
 		4BE3CBCB2272F3DF006607E4 /* CoreTextPageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextPageModel.h; sourceTree = "<group>"; };
 		4BE3CBCC2272F3DF006607E4 /* JsonTemplate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JsonTemplate.json; sourceTree = "<group>"; };
-		4BE3CBCD2272F3DF006607E4 /* CoreTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextModel.m; sourceTree = "<group>"; };
+		4BE3CBCD2272F3DF006607E4 /* ParseCoreTextPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseCoreTextPage.m; sourceTree = "<group>"; };
 		4BE3CBCE2272F3DF006607E4 /* CoreTextLinkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextLinkModel.m; sourceTree = "<group>"; };
 		4BE3CBCF2272F3DF006607E4 /* CoreTextImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextImageModel.m; sourceTree = "<group>"; };
 		4BE3CBD02272F3DF006607E4 /* CoreTextPageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextPageModel.m; sourceTree = "<group>"; };
@@ -255,8 +255,8 @@
 		4BE3CBC72272F3DF006607E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4BE3CBC82272F3DF006607E4 /* CoreTextModel.h */,
-				4BE3CBCD2272F3DF006607E4 /* CoreTextModel.m */,
+				4BE3CBC82272F3DF006607E4 /* ParseCoreTextPage.h */,
+				4BE3CBCD2272F3DF006607E4 /* ParseCoreTextPage.m */,
 				760AF38023A3CA7000A94169 /* CTRunRefModel.h */,
 				760AF37F23A3CA7000A94169 /* CTRunRefModel.m */,
 				760AF37D23A3CA4500A94169 /* CTLineRefModel.h */,
@@ -488,7 +488,7 @@
 				4BE3CBE12272F3DF006607E4 /* CoreTextImageModel.m in Sources */,
 				760AF38123A3CA7000A94169 /* CTRunRefModel.m in Sources */,
 				4BE3CB902272F3C9006607E4 /* AppDelegate.m in Sources */,
-				4BE3CBDF2272F3DF006607E4 /* CoreTextModel.m in Sources */,
+				4BE3CBDF2272F3DF006607E4 /* ParseCoreTextPage.m in Sources */,
 				760AF37E23A3CA4500A94169 /* CTLineRefModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

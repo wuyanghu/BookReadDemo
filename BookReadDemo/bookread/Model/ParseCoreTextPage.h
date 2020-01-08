@@ -13,7 +13,7 @@
 @class CoreTextImageModel;
 @class CoreTextLinkModel;
 
-@interface CoreTextModel : NSObject
+@interface ParseCoreTextPage : NSObject
 @property (nonatomic,strong) NSMutableArray<CoreTextPageModel *> * pageDataArray;//提前计算好的分页数据
 
 @property (strong,nonatomic) NSMutableArray<CoreTextImageModel *> *imageArray;//图片

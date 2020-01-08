@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreTextPageModel.h"
-#import "CoreTextModel.h"
+#import "ParseCoreTextPage.h"
 
 @interface CTDispalyView : UIView
 @property(strong,nonatomic) CoreTextPageModel * pageModel;
-@property (nonatomic,strong) CoreTextModel * coreTextModel;
+@property (nonatomic,strong) ParseCoreTextPage * coreTextModel;
 @end

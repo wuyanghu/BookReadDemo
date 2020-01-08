@@ -12,7 +12,7 @@
 @implementation CoreTextUtils
 
 //检测点击位置是否在链接上
-+(CoreTextLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CoreTextPageModel *)pageModel coreTextModel:(CoreTextModel *)coreTextModel{
++(CoreTextLinkModel *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CoreTextPageModel *)pageModel coreTextModel:(ParseCoreTextPage *)coreTextModel{
 
     CTFrameRef textFrame = pageModel.frameRef;
     CFArrayRef lines = CTFrameGetLines(textFrame);

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreTextPageModel.h"
-#import "CoreTextModel.h"
+#import "ParseCoreTextPage.h"
 
 @interface PageDetailViewController : UIViewController
-- (void)refreshViewWithIndex:(NSInteger)index coreTextModel:(CoreTextModel *)coreTextModel;
+- (void)refreshViewWithIndex:(NSInteger)index coreTextModel:(ParseCoreTextPage *)coreTextModel;
 @end

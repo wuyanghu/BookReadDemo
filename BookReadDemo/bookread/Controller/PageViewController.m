@@ -13,7 +13,7 @@
 
 @interface PageViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 {
-    CoreTextModel * _coreTextData;
+    ParseCoreTextPage * _coreTextData;
     BOOL _isAfterPage;
 }
 @property(nonatomic ,strong) UIPageViewController *pageViewController;
@@ -50,7 +50,7 @@
 }
 
 - (void)parseBookReadJson{
-    _coreTextData = [CoreTextModel new];
+    _coreTextData = [ParseCoreTextPage new];
     NSString * bookJosn = [[NSBundle mainBundle] pathForResource:@"JsonTemplate" ofType:@"json"];
     [_coreTextData calculatePageArray:bookJosn];
 }

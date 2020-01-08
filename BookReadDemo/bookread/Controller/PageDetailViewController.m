@@ -8,7 +8,7 @@
 
 #import "PageDetailViewController.h"
 #import "CTDispalyView.h"
-#import "CoreTextModel.h"
+#import "ParseCoreTextPage.h"
 
 @interface PageDetailViewController ()
 @property (nonatomic,strong) CTDispalyView * dispaleView;
@@ -40,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)refreshViewWithIndex:(NSInteger)index coreTextModel:(CoreTextModel *)coreTextModel{
+- (void)refreshViewWithIndex:(NSInteger)index coreTextModel:(ParseCoreTextPage *)coreTextModel{
     //创建绘制数据实例
     self.dispaleView.pageModel = coreTextModel.pageDataArray[index];
     self.dispaleView.coreTextModel = coreTextModel;
